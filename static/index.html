@@ -1,312 +1,726 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Aqua AI </title>
-<style>
-  /* Aqua glass-themed dark style, expanded and enhanced */
-  :root {
-    --color-primary: #00d4ff;
-    --color-primary-dark: #0088a8;
-    --color-bg-dark: #0a1b2a;
-    --color-bg-secondary: rgba(10, 27, 42, 0.7);
-    --color-text-primary: #e8ecf1;
-    --color-text-secondary: #a8b2c1;
-    --color-border: rgba(0, 212, 255, 0.3);
-  }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Aqua AI - Blue & Black Theme</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
+    <style>
+        :root {
+            --color-primary: #3fb7ff;
+            --color-primary-dark: #1f8ad1;
+            --color-bg-dark: #0a0a0a;
+            --color-bg-secondary: rgba(10, 10, 10, 0.8);
+            --color-text-primary: #d7ecff;
+            --color-text-secondary: #6ea9d8;
+            --color-border: rgba(63, 183, 255, 0.25);
+            --color-neon: #3fb7ff;
+            --color-neon-glow: rgba(63, 183, 255, 0.25);
+            --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-  * {
-    box-sizing: border-box;
-  }
+        html, body {
+            margin: 0;
+            padding: 0;
+            font-family: var(--font-family);
+            background-color: var(--color-bg-dark);
+            color: var(--color-text-primary);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            -webkit-font-smoothing: antialiased;
+            background-image:
+                linear-gradient(45deg, #00446615 1px, transparent 1px),
+                linear-gradient(-45deg, #00446615 1px, transparent 1px);
+            background-size: 40px 40px;
+            overflow-x: hidden;
+            max-width: 100%;
+        }
 
-  body {
-    margin: 0; padding: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: var(--color-bg-dark);
-    color: var(--color-text-primary);
-    -webkit-font-smoothing: antialiased;
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-  }
+        header {
+            display: flex;
+            align-items: center;
+            padding: 20px 30px;
+            font-weight: 900;
+            font-size: 2.2rem;
+            color: var(--color-primary);
+            text-shadow: 0 0 8px var(--color-neon);
+            border-bottom: 1px solid var(--color-border);
+            user-select: none;
+            letter-spacing: 0.06em;
+            gap: 15px;
+            background: var(--color-bg-secondary);
+            backdrop-filter: blur(18px);
+        }
 
-  header {
-    text-align: center;
-    padding: 20px;
-    font-weight: 700;
-    font-size: 2rem;
-    user-select: none;
-    background: var(--color-bg-secondary);
-    backdrop-filter: blur(15px);
-    border-bottom: 1px solid var(--color-border);
-    color: var(--color-primary);
-  }
+        .header-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            box-shadow: 0 0 10px var(--color-neon-glow);
+            border: 2px solid var(--color-primary);
+            object-fit: cover;
+            user-select: none;
+        }
 
-  main {
-    flex: 1;
-    margin: 20px auto;
-    max-width: 700px;
-    background: var(--color-bg-secondary);
-    border-radius: 15px;
-    box-shadow: 0 0 30px var(--color-border);
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    backdrop-filter: blur(15px);
-  }
+        nav {
+            display: flex;
+            justify-content: space-around;
+            background: var(--color-bg-secondary);
+            padding: 0 30px;
+            height: 56px;
+            align-items: center;
+            backdrop-filter: blur(18px);
+            border-bottom: 1px solid var(--color-border);
+            box-shadow: 0 0 10px var(--color-neon-glow);
+            user-select: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
 
-  #chat {
-    flex: 1;
-    overflow-y: auto;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-  }
+        nav button {
+            background: transparent;
+            border: none;
+            color: var(--color-primary);
+            cursor: pointer;
+            padding: 6px 18px;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 0 6px transparent;
+            transition: color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+            position: relative;
+        }
 
-  .message {
-    max-width: 70%;
-    padding: 12px 20px;
-    border-radius: 20px;
-    font-size: 1rem;
-    word-break: break-word;
-    line-height: 1.4;
-  }
+        nav button:hover {
+            color: var(--color-primary);
+            box-shadow: 0 0 12px var(--color-neon);
+            background: rgba(63, 183, 255, 0.16);
+        }
 
-  .message.user {
-    background: linear-gradient(135deg, rgba(48, 131, 220, 0.9), rgba(0, 136, 168, 0.8));
-    color: white;
-    align-self: flex-end;
-  }
+        .container {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 280px minmax(0, 1.4fr) 280px;
+            max-width: 1400px;
+            width: 100%;
+            margin: 20px auto 30px auto;
+            gap: 18px;
+            height: calc(100vh - 170px);
+            user-select: text;
+        }
 
-  .message.ai {
-    background: rgba(0, 212, 255, 0.7);
-    color: var(--color-bg-dark);
-    border: 1px solid rgba(0, 212, 255, 0.6);
-    align-self: flex-start;
-  }
+        aside {
+            background: var(--color-bg-secondary);
+            border-radius: 16px;
+            box-shadow: 0 0 22px var(--color-border);
+            padding: 18px 18px;
+            backdrop-filter: blur(18px);
+            color: var(--color-primary);
+            text-shadow: 0 0 4px var(--color-neon);
+            font-weight: 600;
+            font-size: 0.95rem;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
 
-  #input-area {
-    border-top: 1px solid var(--color-border);
-    display: flex;
-    gap: 10px;
-    padding: 15px 20px;
-    background: var(--color-bg-secondary);
-  }
+        aside h3 {
+            font-weight: 700;
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+            letter-spacing: 0.03em;
+            user-select: text;
+            border-bottom: 1px solid var(--color-border);
+            padding-bottom: 6px;
+        }
 
-  #text-input {
-    flex-grow: 1;
-    padding: 12px 20px;
-    border-radius: 25px;
-    border: none;
-    outline: none;
-    font-size: 1rem;
-    background: rgba(255, 255, 255, 0.1);
-    color: var(--color-text-primary);
-    transition: box-shadow 0.3s ease;
-  }
-  #text-input::placeholder {
-    color: var(--color-text-secondary);
-  }
-  #text-input:focus {
-    box-shadow: 0 0 10px var(--color-primary);
-    background: rgba(255, 255, 255, 0.15);
-  }
+        aside button {
+            padding: 10px 16px;
+            background: rgba(63, 183, 255, 0.15);
+            border: 1px solid var(--color-border);
+            border-radius: 14px;
+            color: var(--color-primary);
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.25s ease, box-shadow 0.25s ease;
+            margin-bottom: 10px;
+            box-shadow: 0 0 3px transparent;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+            user-select: none;
+        }
 
-  button {
-    border: none;
-    border-radius: 25px;
-    padding: 0 25px;
-    font-weight: 700;
-    cursor: pointer;
-    background: var(--color-primary);
-    color: var(--color-bg-dark);
-    transition: background 0.3s ease;
-  }
-  button:hover:not(:disabled) {
-    background: var(--color-primary-dark);
-  }
-  button:disabled {
-    background: #555;
-    cursor: not-allowed;
-  }
-</style>
+        aside button:hover {
+            background: var(--color-primary);
+            color: var(--color-bg-dark);
+            box-shadow: 0 0 18px var(--color-neon);
+        }
+
+        .info-panel {
+            flex-grow: 1;
+            padding: 10px 12px;
+            background: rgba(63, 183, 255, 0.06);
+            border-radius: 12px;
+            border: 1px dashed var(--color-primary);
+            color: var(--color-text-secondary);
+            font-size: 0.9rem;
+            overflow-y: auto;
+            user-select: text;
+        }
+
+        main {
+            background: var(--color-bg-secondary);
+            border-radius: 20px;
+            box-shadow: 0 0 30px var(--color-border);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            backdrop-filter: blur(18px);
+            user-select: text;
+            padding: 0;
+            width: 100%;
+            max-width: none;
+            justify-self: stretch;
+            margin: 0;
+        }
+
+        #chat {
+            flex: 1;
+            overflow-y: auto;
+            padding: 24px 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            font-size: 0.98rem;
+            line-height: 1.5;
+            user-select: text;
+            max-height: calc(100vh - 280px);
+        }
+
+        .message {
+            max-width: 68%;
+            padding: 14px 26px;
+            border-radius: 24px;
+            word-break: break-word;
+            transition: box-shadow 0.25s ease;
+            box-shadow: 0 0 8px transparent;
+        }
+
+        .message.user {
+            background: white;
+            color: #0a0a0a;
+            align-self: flex-end;
+            box-shadow: 0 0 14px #2ca4f088;
+        }
+
+        .message.user:hover {
+            box-shadow: 0 0 22px #53c6ffcc;
+        }
+
+        .message.ai {
+            background: white;
+            color: #0a0a0a;
+            border: 1.4px solid rgba(63, 183, 255, 0.55);
+            align-self: flex-start;
+            box-shadow: 0 0 16px rgba(63, 183, 255, 0.6);
+        }
+
+        .message.ai:hover {
+            box-shadow: 0 0 24px rgba(63, 183, 255, 0.9);
+        }
+
+        #input-area {
+            border-top: 1.2px solid var(--color-border);
+            display: flex;
+            gap: 10px;
+            padding: 12px 20px;
+            background: var(--color-bg-secondary);
+            backdrop-filter: blur(18px);
+            align-items: center;
+            margin-top: 6px;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+        }
+
+        #text-input {
+            flex-grow: 1;
+            padding: 8px 16px;
+            border-radius: 24px;
+            border: none;
+            outline: none;
+            font-size: 0.98rem;
+            background: white;
+            color: #0a0a0a;
+            box-shadow: 0 0 10px transparent;
+            transition: box-shadow 0.25s ease, background 0.25s ease;
+            font-weight: 600;
+            font-family: var(--font-family);
+            height: 34px;
+        }
+
+        #text-input::placeholder {
+            color: var(--color-text-secondary);
+            font-style: italic;
+        }
+
+        #text-input:focus {
+            box-shadow: 0 0 20px var(--color-primary);
+            background: white;
+        }
+
+        button {
+            border: none;
+            border-radius: 24px;
+            padding: 0 16px;
+            font-weight: 700;
+            cursor: pointer;
+            background: var(--color-primary);
+            color: var(--color-bg-dark);
+            transition: background 0.25s ease, box-shadow 0.35s ease, transform 0.2s ease;
+            box-shadow: 0 0 14px var(--color-primary);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.88rem;
+            user-select: none;
+            height: 34px;
+            min-width: 56px;
+            justify-content: center;
+        }
+
+        button:hover:not(:disabled) {
+            background: var(--color-primary-dark);
+            box-shadow: 0 0 24px var(--color-neon);
+            transform: scale(1.03);
+        }
+
+        button:disabled {
+            background: #222;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        #clear-chat-btn {
+            padding: 0 14px;
+            background: transparent;
+            color: var(--color-primary);
+            box-shadow: none;
+            font-weight: 600;
+            font-size: 0.85rem;
+            user-select: none;
+            height: 30px;
+        }
+
+        #clear-chat-btn:hover {
+            background: rgba(63, 183, 255, 0.22);
+            box-shadow: 0 0 14px var(--color-neon);
+            transform: scale(1.08);
+        }
+
+        #attach-btn {
+            min-width: 34px;
+            padding: 0 10px;
+        }
+
+        #chat::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        #chat::-webkit-scrollbar-thumb {
+            background: var(--color-primary-dark);
+            border-radius: 18px;
+            box-shadow: inset 0 0 6px var(--color-neon);
+        }
+
+        #chat::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        footer {
+            height: 38px;
+            background: var(--color-bg-secondary);
+            color: var(--color-text-secondary);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.82rem;
+            user-select: none;
+            border-top: 1px solid var(--color-border);
+            letter-spacing: 0.06em;
+            text-shadow: 0 0 2px #001f3399;
+            margin-top: auto;
+        }
+
+        /* Responsive CSS */
+        @media (max-width: 1024px) {
+            .container {
+                grid-template-columns: 1fr 1fr;
+                height: auto;
+                margin: 10px;
+            }
+
+            aside {
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+                height: auto;
+                margin: 10px;
+            }
+
+            header {
+                font-size: 1.6rem;
+                padding: 15px 20px;
+            }
+
+            .header-avatar {
+                width: 40px;
+                height: 40px;
+            }
+
+            nav {
+                flex-wrap: wrap;
+                height: auto;
+                gap: 8px;
+                padding: 10px 20px;
+                font-size: 0.85rem;
+            }
+
+            main {
+                max-width: 100%;
+                border-radius: 0;
+                margin: 0;
+            }
+
+            aside {
+                border-radius: 10px;
+                padding: 12px 12px;
+                margin-bottom: 15px;
+            }
+
+            #text-input {
+                height: 40px;
+                font-size: 1rem;
+            }
+
+            button {
+                height: 40px;
+                font-size: 0.9rem;
+            }
+
+            nav button,
+            aside button {
+                padding: 8px 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                font-size: 1.3rem;
+            }
+            
+            .header-avatar {
+                width: 35px;
+                height: 35px;
+            }
+        }
+    </style>
 </head>
+
 <body>
-<header>AquaAI</header>
+    <header>
+        <img class="header-avatar" src="/static/IMG_20251201_110618.jpg" alt="AquaAI Logo" />
+        AquaAI
+    </header>
 
-<main>
-  <div id="chat"></div>
-  <div id="input-area">
-    <input id="text-input" type="text" placeholder="Type your message here..." autocomplete="off" />
-    <button id="send-btn">Send</button>
-    <button id="voice-btn" title="Voice input">🎤 Voice</button>
-  </div>
-</main>
+    <nav>
+        <button id="history-btn" title="View History">📜 History</button>
+        <button id="whatsnew-btn" title="What's New">🆕 What's New</button>
+        <button id="notification-btn" title="Notifications">🔔 Notifications</button>
+        <button id="account-btn" title="Account Info">👤 Account</button>
+        <button id="upgrade-btn" title="Upgrade Plan">⚡ Upgrade</button>
+    </nav>
 
-<script>
-  const chat = document.getElementById("chat");
-  const textInput = document.getElementById("text-input");
-  const sendBtn = document.getElementById("send-btn");
-  const voiceBtn = document.getElementById("voice-btn");
+    <div class="container">
+        <aside aria-label="Left sidebar">
+            <h3>Quick Actions</h3>
+            <button id="feature-1" title="Saved Replies">💾 Saved Replies</button>
+            <button id="feature-2" title="Theme Switcher">🎨 Theme Switcher</button>
+            <button id="feature-3" title="Settings">⚙️ Settings</button>
+            <button id="feature-4" title="Help & Support">❓ Help & Support</button>
+        </aside>
 
-  function appendMessage(text, sender) {
-    const div = document.createElement("div");
-    div.classList.add("message");
-    div.classList.add(sender === "user" ? "user" : "ai");
-    div.textContent = text;
-    chat.appendChild(div);
-    chat.scrollTop = chat.scrollHeight;
-  }
+        <main>
+            <div id="chat"></div>
+            <div id="input-area">
+                <!-- Hidden file input -->
+                <input type="file" id="file-input" style="display: none;" />
+                
+                <button id="attach-btn" title="Attach file">🔗</button>
+                <input id="text-input" type="text" placeholder="Type your message here..." autocomplete="off" aria-label="Message input" />
+                <button id="clear-chat-btn" title="Clear chat">✖ Clear</button>
+                <button id="send-btn" title="Send message">Send</button>
+                <button id="voice-btn" title="Voice input">🎤 Voice</button>
+            </div>
+        </main>
 
-  async function sendMessage() {
-    const message = textInput.value.trim();
-    if (!message) return;
-    appendMessage(message, "user");
-    textInput.value = "";
-    try {
-      const res = await fetch("/ask", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ prompt: message })
-      });
-      const data = await res.json();
-      appendMessage(data.answer, "ai");
-      speakText(data.answer);
-    } catch {
-      appendMessage("Error: Could not reach server.", "ai");
-    }
-  }
+        <aside aria-label="Right sidebar">
+            <h3>User Stats</h3>
+            <div class="info-panel" tabindex="0" aria-label="User statistics and usage information">
+                <p>Messages sent: <strong id="message-count">0</strong></p>
+                <p>Active sessions: <strong>1</strong></p>
+                <p>Last active: <strong>Just now</strong></p>
+            </div>
 
-  sendBtn.addEventListener("click", sendMessage);
-  textInput.addEventListener("keypress", e => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      sendMessage();
-    }
-  });
+            <h3>Notifications</h3>
+            <div class="info-panel" tabindex="0" aria-label="Recent notifications">
+                <ul>
+                    <li>Voice recognition ready</li>
+                    <li>Text-to-speech enabled</li>
+                </ul>
+            </div>
 
-  // Voice recognition and synthesis
-  let recognition = null;
-  let recognizing = false;
+            <h3>Upgrade Options</h3>
+            <div class="info-panel" tabindex="0" aria-label="Upgrade plan information">
+                <p>Current Plan: Free</p>
+                <p>Upgrade for more features</p>
+            </div>
+        </aside>
+    </div>
 
-  if ("webkitSpeechRecognition" in window) {
-    recognition = new webkitSpeechRecognition();
-    recognition.lang = "en-US";
-    recognition.interimResults = false;
-    recognition.continuous = false;
+    <footer>
+        &copy; 2025 AquaAI. All rights reserved.
+    </footer>
 
-    recognition.onstart = () => {
-      recognizing = true;
-      voiceBtn.textContent = "🎤 Listening...";
-      voiceBtn.disabled = true;
-    };
+    <script>
+        const chat = document.getElementById("chat");
+        const textInput = document.getElementById("text-input");
+        const sendBtn = document.getElementById("send-btn");
+        const voiceBtn = document.getElementById("voice-btn");
+        const clearBtn = document.getElementById("clear-chat-btn");
+        const attachBtn = document.getElementById("attach-btn");
+        const fileInput = document.getElementById("file-input");
+        const messageCountElement = document.getElementById("message-count");
 
-    recognition.onresult = async (event) => {
-      recognizing = false;
-      voiceBtn.textContent = "🎤 Voice";
-      voiceBtn.disabled = false;
-      const transcript = event.results[0][0].transcript;
-      appendMessage(transcript, "user");
-      try {
-        const res = await fetch("/ask", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ prompt: transcript })
+        let messageCount = 0;
+
+        function updateMessageCount() {
+            messageCount++;
+            messageCountElement.textContent = messageCount;
+        }
+
+        function appendMessage(text, sender) {
+            const div = document.createElement("div");
+            div.classList.add("message");
+            div.classList.add(sender === "user" ? "user" : "ai");
+            div.textContent = text;
+            chat.appendChild(div);
+            chat.scrollTop = chat.scrollHeight;
+            
+            if (sender === "user") {
+                updateMessageCount();
+            }
+        }
+
+        async function sendMessage() {
+            const message = textInput.value.trim();
+            if (!message) return;
+            appendMessage(message, "user");
+            textInput.value = "";
+            
+            // Disable send button while processing
+            sendBtn.disabled = true;
+            sendBtn.textContent = "Sending...";
+            
+            try {
+                const res = await fetch("/ask", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ prompt: message })
+                });
+                const data = await res.json();
+                appendMessage(data.answer, "ai");
+                speakText(data.answer);
+            } catch (error) {
+                appendMessage("Error: Could not reach server.", "ai");
+                console.error("API Error:", error);
+            } finally {
+                // Re-enable send button
+                sendBtn.disabled = false;
+                sendBtn.textContent = "Send";
+            }
+        }
+
+        sendBtn.addEventListener("click", sendMessage);
+        textInput.addEventListener("keypress", e => {
+            if (e.key === "Enter") {
+                e.preventDefault();
+                sendMessage();
+            }
         });
-        const data = await res.json();
-        appendMessage(data.answer, "ai");
-        speakText(data.answer);
-      } catch {
-        appendMessage("Error: Could not reach server.", "ai");
-      }
-    };
 
-    recognition.onerror = () => {
-      recognizing = false;
-      voiceBtn.textContent = "🎤 Voice";
-      voiceBtn.disabled = false;
-      appendMessage("Voice recognition error occurred.", "ai");
-    };
+        clearBtn.addEventListener("click", () => {
+            if (confirm("Are you sure you want to clear the chat?")) {
+                chat.innerHTML = "";
+                messageCount = 0;
+                messageCountElement.textContent = "0";
+                appendMessage("Chat cleared. Start a new conversation!", "ai");
+            }
+        });
 
-    recognition.onend = () => {
-      recognizing = false;
-      voiceBtn.textContent = "🎤 Voice";
-      voiceBtn.disabled = false;
-    };
-  } else {
-    voiceBtn.disabled = true;
-    appendMessage("Voice recognition not supported on this browser.", "ai");
-  }
+        // Open file picker when attach button clicked
+        attachBtn.addEventListener("click", () => {
+            fileInput.click();
+        });
 
-  voiceBtn.addEventListener("click", () => {
-    if (recognizing) {
-      recognition.stop();
-      recognizing = false;
-    } else {
-      recognition.start();
-    }
-  });
+        // When a file is selected, show its name in chat
+        fileInput.addEventListener("change", () => {
+            if (fileInput.files.length === 0) return;
+            const file = fileInput.files[0];
+            appendMessage(`Attached file: ${file.name} (Note: File attachment is for display only. Backend integration needed for actual file processing.)`, "user");
+            // Reset file input for next attachment
+            fileInput.value = "";
+        });
 
-  function speakText(text) {
-    if (!("speechSynthesis" in window)) return;
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.rate = 1;
-    window.speechSynthesis.speak(utterance);
-  }
+        // Voice recognition and synthesis
+        let recognition = null;
+        let recognizing = false;
 
-  // Initial greeting
-  appendMessage("Hello! I am Aqua AI. How can I assist you today?", "ai");
-  // Voice recognition setup - add once on page load
-if ("webkitSpeechRecognition" in window) {
-  const recognition = new webkitSpeechRecognition();
-  recognition.lang = "en-US";
-  recognition.interimResults = false;
-  recognition.continuous = false;
+        if ("webkitSpeechRecognition" in window) {
+            recognition = new webkitSpeechRecognition();
+            recognition.lang = "en-US";
+            recognition.interimResults = false;
+            recognition.continuous = false;
 
-  recognition.onstart = () => {
-    // Update UI to indicate listening state
-  };
-  recognition.onresult = async (event) => {
-    const transcript = event.results[0][0].transcript;
-    addUserMessage(transcript); // your existing function to add user msg
-    try {
-      const res = await fetch("/ask", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ prompt: transcript })
-      });
-      const data = await res.json();
-      addAiMessage(data.answer);
-      speakText(data.answer);
-    } catch {
-      addAiMessage("Error: Unable to reach server.");
-    }
-  };
-  recognition.onerror = () => {
-    // Handle error, update UI
-  };
-  recognition.onend = () => {
-    // Cleanup UI listening state
-  };
+            recognition.onstart = () => {
+                recognizing = true;
+                voiceBtn.textContent = "🎤 Listening...";
+                voiceBtn.disabled = true;
+                appendMessage("Listening... Speak now", "ai");
+            };
 
-  // Hook up your voice button to start recognition:
-  document.getElementById("yourVoiceBtnId").addEventListener("click", () => {
-    recognition.start();
-  });
-} else {
-  // Disable voice button and notify not supported
-}
+            recognition.onresult = async (event) => {
+                recognizing = false;
+                voiceBtn.textContent = "🎤 Voice";
+                voiceBtn.disabled = false;
+                const transcript = event.results[0][0].transcript;
+                appendMessage(transcript, "user");
+                
+                // Disable voice button while processing
+                voiceBtn.disabled = true;
+                voiceBtn.textContent = "Processing...";
+                
+                try {
+                    const res = await fetch("/ask", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ prompt: transcript })
+                    });
+                    const data = await res.json();
+                    appendMessage(data.answer, "ai");
+                    speakText(data.answer);
+                } catch {
+                    appendMessage("Error: Could not reach server.", "ai");
+                } finally {
+                    // Re-enable voice button
+                    voiceBtn.disabled = false;
+                    voiceBtn.textContent = "🎤 Voice";
+                }
+            };
 
-// Text to speech helper function
-function speakText(text) {
-  if (!("speechSynthesis" in window)) return;
-  const utterance = new SpeechSynthesisUtterance(text);
-  utterance.rate = 1;
-  window.speechSynthesis.speak(utterance);
-}
+            recognition.onerror = (event) => {
+                recognizing = false;
+                voiceBtn.textContent = "🎤 Voice";
+                voiceBtn.disabled = false;
+                if (event.error !== 'no-speech') {
+                    appendMessage("Voice recognition error: " + event.error, "ai");
+                }
+            };
 
-</script>
+            recognition.onend = () => {
+                recognizing = false;
+                voiceBtn.textContent = "🎤 Voice";
+                voiceBtn.disabled = false;
+            };
+        } else {
+            voiceBtn.disabled = true;
+            voiceBtn.title = "Voice recognition not supported";
+            appendMessage("Voice recognition not supported on this browser.", "ai");
+        }
+
+        voiceBtn.addEventListener("click", () => {
+            if (!recognition) return;
+            
+            if (recognizing) {
+                recognition.stop();
+                recognizing = false;
+                voiceBtn.textContent = "🎤 Voice";
+            } else {
+                recognition.start();
+            }
+        });
+
+        function speakText(text) {
+            if (!("speechSynthesis" in window)) {
+                appendMessage("Text-to-speech not supported on this browser.", "ai");
+                return;
+            }
+            
+            try {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.rate = 1;
+                utterance.pitch = 1;
+                utterance.volume = 1;
+                
+                // Optional: Select a voice
+                const voices = window.speechSynthesis.getVoices();
+                if (voices.length > 0) {
+                    // Prefer a female voice if available
+                    const femaleVoice = voices.find(v => v.name.includes("Female") || v.name.includes("female"));
+                    if (femaleVoice) {
+                        utterance.voice = femaleVoice;
+                    }
+                }
+                
+                window.speechSynthesis.speak(utterance);
+            } catch (error) {
+                console.error("Text-to-speech error:", error);
+            }
+        }
+
+        // Initialize speech synthesis voices
+        if ('speechSynthesis' in window) {
+            // Some browsers need this to populate voices
+            speechSynthesis.onvoiceschanged = function() {
+                // Voices are now available
+            };
+        }
+
+        // Add navigation button click handlers (placeholder functionality)
+        document.querySelectorAll('nav button').forEach(button => {
+            button.addEventListener('click', function() {
+                const action = this.textContent;
+                appendMessage(`Clicked ${action} (feature coming soon)`, "ai");
+            });
+        });
+
+        // Add sidebar button click handlers (placeholder functionality)
+        document.querySelectorAll('aside button').forEach(button => {
+            button.addEventListener('click', function() {
+                const action = this.textContent;
+                appendMessage(`${action} clicked (feature coming soon)`, "ai");
+            });
+        });
+
+        // Initial greeting
+        appendMessage("Hello! I am Aqua AI. How can I assist you today?", "ai");
+    </script>
 </body>
 </html>
